@@ -1,0 +1,25 @@
+<%= form_for [@project,@todo], :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :description, :class => 'text_area' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :developer, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :developer_id, options_from_collection_for_select(Developer.select("id,name"), "id", "name", @todo.developer_id) , prompt: "Select developer"%>
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                project_todos_path(@project), :class => 'btn' %>
+  </div>
+<% end %>
