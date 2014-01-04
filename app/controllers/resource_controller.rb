@@ -41,8 +41,8 @@ class ResourceController < ApplicationController
   end
 
   def set_resource(val, options={})
-    r = options[:pluralize] ? resource_name.pluralize : resource_name
-    instance_variable_set "@#{r}".downcase, val
+    r_name = options[:pluralize] ? resource_name.pluralize : resource_name
+    instance_variable_set "@#{r_name}".downcase, val
   end
 
   def resource
@@ -50,7 +50,7 @@ class ResourceController < ApplicationController
   end
 
   def resource_name
-    "#{klass}".underscore
+    "#{klass.new.class}".underscore
   end
 
   def after_create_path

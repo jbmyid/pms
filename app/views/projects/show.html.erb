@@ -8,13 +8,21 @@
   <dd><%= @project.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
   <dd><%= @project.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:developers) %>:</strong></dt>
+  <dd><%= @project.dev_names.join(",") %></dd>
 </dl>
+
+
+
+
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               projects_path, :class => 'btn'  %>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_project_path(@project), :class => 'btn' %>
+  <%= link_to "Manage Todos",
+              project_todos_path(@project), :class => 'btn' %>              
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               project_path(@project),
               :method => 'delete',

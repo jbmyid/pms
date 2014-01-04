@@ -11,6 +11,12 @@
       <%= f.text_area :description, :class => 'text_area' %>
     </div>
   </div>
+  <div class="control-group">
+    <%= f.label :developer_ids, "Developers", :class => 'control-label' %>
+    <div class="controls">
+      <%= select_tag "project[developer_ids][]", options_from_collection_for_select(Developer.select("id,name"), "id", "name", @project.developer_ids), {:class => 'select', :multiple => true, :size => 5 } %>
+    </div>
+  </div>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>

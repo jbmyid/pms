@@ -1,6 +1,10 @@
 Pms::Application.routes.draw do
 
-  resources :projects
+
+
+  resources :projects do
+    resources :todos
+  end
 
 
   devise_for :people do

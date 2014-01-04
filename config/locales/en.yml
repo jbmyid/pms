@@ -3,3 +3,7 @@
 
 en:
   hello: "Hello world"
+  states:
+    assigned: "New"
+    inprogress: "In Progress"
+    done: "Done"
