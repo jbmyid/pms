@@ -1,1 +1,36 @@
-Hi Admin
+%h3
+  Todo Snapshot by Developers
+%table.table
+  - deve_data = @data.group_by{|t|"#{t.d_id}_#{t.state}"}
+  - [nil, *Todo::STATES].each do |i,state|
+    %tr
+      %td
+        = state ? t("states.#{state}") : "Status"
+      - @developers.each do |dev|
+        %td
+          -if state
+            - dev_state = deve_data["#{dev.id}_#{state}"]
+            - if dev_state
+              - dev_state.each do |ds| 
+                %span.devTodo
+                  =ds.todo_name
+          -else
+            = dev.name
+%h3
+  Todo Snapshot by Projects            
+%table.table
+  - deve_data = @data.group_by{|t|"#{t.p_id}_#{t.state}"}
+  - [nil, *Todo::STATES].each do |i,state|
+    %tr
+      %td
+        = state ? t("states.#{state}") : "Status"
+      - @projects.each do |p|
+        %td
+          -if state
+            - dev_state = deve_data["#{p.id}_#{state}"]
+            - if dev_state
+              - dev_state.each do |ds| 
+                %span.devTodo
+                  =ds.todo_name
+          -else
+            = p.name
