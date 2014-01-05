@@ -1,3 +1,5 @@
+%script{type: "text/javascript", src:"https://www.google.com/jsapi"}
+= javascript_include_tag "pie_chart"
 %h3
   Todo Snapshot by Developers
 %table.table
@@ -34,3 +36,6 @@
                   =ds.todo_name
           -else
             = p.name
+#piechart{style: "width:900px;hieght:500px"}
+:coffeescript
+  chart = new ApiChart([["Task", "Hours per Day"], ["Work", 11], ["Eat", 2], ["Commute", 2], ["Watch TV", 2], ["Sleep", 7]])
