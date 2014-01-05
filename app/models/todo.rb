@@ -35,9 +35,9 @@ class Todo < ActiveRecord::Base
   def self.stats
     stat = []
     stat << ["Todos","Status"]
-    stat << ["New", assigned.count]    
-    stat << ["In Progress", inprogress.count]    
-    stat << ["Done", done.count]    
+    STATES.each do |i,v|
+      stat << [I18n.t("states.#{v}"), send(i).count]
+    end  
     stat
   end
 
