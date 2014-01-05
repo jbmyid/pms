@@ -3,7 +3,8 @@ class Todo < ActiveRecord::Base
   attr_accessible :description, :name, :developer_id
 
   validates :name, :description, presence: true
-
+  validate :project_developers_only
+  belongs_to :project
   before_create :set_defaults
 
   STATES.each do |i,v|
@@ -24,28 +25,17 @@ class Todo < ActiveRecord::Base
       todo.save
     end
 
-    event :release do
-      transition cart: :void, if: lambda { |b| b.can_release? }
+    event :next do
+      transition assigned: :inprogress, inprogress: :done
     end
-
-    event :do_payment do
-      transition cart: :payment, if: lambda {|b| b.can_next?}
-    end
-
-    event :payment_done do
-      transition payment: :complete, if: lambda {|b| b.can_next?}
-    end
-
-    event :cancel do
-      transition complete: :cancelled
-    end
-
-    after_transition to: :void, do: :release_all_reservations
-    after_transition to: :complete, do: :set_complete
-    after_transition to: :cancelled, do: :process_cancellation
+    
   end
 
   private
+
+  def project_developers_only
+    self.errors[:developer_id] << "can only be developers of Project #{project.name} only" if developer_id && !project.developer_ids.include?(developer_id)
+  end
 
   def set_defaults
     assigned

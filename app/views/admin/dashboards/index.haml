@@ -2,7 +2,7 @@
   Todo Snapshot by Developers
 %table.table
   - deve_data = @data.group_by{|t|"#{t.d_id}_#{t.state}"}
-  - [nil, *Todo::STATES].each do |i,state|
+  - admin_dash_states.each do |i,state|
     %tr
       %td
         = state ? t("states.#{state}") : "Status"
@@ -20,7 +20,7 @@
   Todo Snapshot by Projects            
 %table.table
   - deve_data = @data.group_by{|t|"#{t.p_id}_#{t.state}"}
-  - [nil, *Todo::STATES].each do |i,state|
+  - admin_dash_states.each do |i,state|
     %tr
       %td
         = state ? t("states.#{state}") : "Status"

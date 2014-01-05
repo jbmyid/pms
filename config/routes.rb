@@ -3,7 +3,11 @@ Pms::Application.routes.draw do
 
 
   resources :projects do
-    resources :todos
+    resources :todos do 
+      member do 
+        get :next
+      end
+    end
   end
 
 

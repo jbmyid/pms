@@ -1,5 +1,10 @@
 class ResourceController < ApplicationController
   before_filter :find_resource, except: [:new, :index, :create]
+  load_and_authorize_resource
+
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to unauthorize_redirect_path, alert: "Access denied"
+  end
 
   def index
     set_resource klass.all, pluralize: true
@@ -63,5 +68,10 @@ class ResourceController < ApplicationController
 
   def after_destroy_path
     send "#{resource_name.pluralize}_path"
+  end
+
+  def unauthorize_redirect_path
+    return root_path unless current_person
+    send "#{current_person.class.to_s.underscore.downcase}_dashboards_path"
   end
 end

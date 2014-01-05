@@ -12,4 +12,8 @@ module ApplicationHelper
   def developers_options
     Developer.select("id, name").map{|d|[d.name,d.id]}    
   end
+
+  def admin_dash_states
+    [nil, *Todo::STATES.map{|i,state|[state,i]}.reverse]
+  end
 end

@@ -14,7 +14,7 @@
   <div class="control-group">
     <%= f.label :developer, :class => 'control-label' %>
     <div class="controls">
-      <%= f.select :developer_id, options_from_collection_for_select(Developer.select("id,name"), "id", "name", @todo.developer_id) , prompt: "Select developer"%>
+      <%= f.select :developer_id, options_from_collection_for_select(@project.developers.select("people.id as id,name"), "id", "name", @todo.developer_id) , prompt: "Select developer"%>
     </div>
   </div>
   <div class="form-actions">

@@ -1,0 +1,23 @@
+%h3
+  My todos
+%table.table
+  %tr
+    %th
+      Name
+    %th 
+      Status
+    %th 
+      Project
+    %th
+      Action
+  - @todos.each do |todo|
+    %tr
+      %td
+        = todo.name
+      %td 
+        = t("states.#{todo.state}")
+      %td
+        = todo.project.name
+      %td
+        = link_to_unless todo.done? ,t("states.next_to.#{todo.state}"), next_project_todo_path(todo.project, todo)
+    

@@ -7,3 +7,6 @@ en:
     assigned: "New"
     inprogress: "In Progress"
     done: "Done"
+    next_to:
+      assigned: "Start"
+      inprogress: "Finish"
