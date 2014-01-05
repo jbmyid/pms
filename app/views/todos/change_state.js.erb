@@ -1,0 +1,4 @@
+$(".devTodo[data-id=<%= @todo.id %>]").remove()
+html = "<span class='devTodo' data-id='<%= @todo.id %>' data-statePath='<%= change_state_project_todo_path(@project, @todo) %>'><%= @todo.name %></span>"
+$(".state_rows.<%= @todo.state %>_row .project_<%= @todo.project_id %>,.state_rows.<%= @todo.state %>_row .dev_<%= @todo.developer_id %>").append($(html))
+todoDragable();

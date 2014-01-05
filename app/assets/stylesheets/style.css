@@ -1,4 +1,10 @@
 .devTodo{
   clear:both;
   display: block;
+  cursor: pointer;
+  border: 1px solid #fff;
+  padding: 2px 5px;
+}
+.devTodo:hover{
+  border: 1px solid #0088cc;
 }

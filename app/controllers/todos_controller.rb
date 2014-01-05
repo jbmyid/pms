@@ -5,6 +5,10 @@ class TodosController < ResourceController
     redirect_to :back
   end
 
+  def change_state
+    @todo.update_column(:state, params[:state]) if Todo::STATES.map{|i,v|v}.include?(params[:state])
+  end
+
   private
   def klass
     @project ||= Project.find(params[:project_id])

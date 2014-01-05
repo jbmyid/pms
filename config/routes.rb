@@ -6,6 +6,7 @@ Pms::Application.routes.draw do
     resources :todos do 
       member do 
         get :next
+        get :change_state
       end
     end
   end

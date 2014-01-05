@@ -1,45 +1,45 @@
-%script{type: "text/javascript", src:"https://www.google.com/jsapi"}
-= javascript_include_tag "pie_chart"
 %h3
   Todo Snapshot by Developers
 %table.table
   - deve_data = @data.group_by{|t|"#{t.d_id}_#{t.state}"}
   - admin_dash_states.each do |i,state|
-    %tr
+    %tr{class: "#{state}_row state_rows", "data-state"=>state}
       %td
         = state ? t("states.#{state}") : "Status"
       - @developers.each do |dev|
-        %td
+        %td{class: "dev_#{dev.id}"}
           -if state
             - dev_state = deve_data["#{dev.id}_#{state}"]
             - if dev_state
               - dev_state.each do |ds| 
-                %span.devTodo
+                %span.devTodo{"data-id"=> ds.t_id, "data-statePath"=>change_state_project_todo_path(ds.p_id, ds.t_id)}
                   =ds.todo_name
           -else
             = dev.name
 %h3
   Todo Snapshot by Projects            
 %table.table
-  - deve_data = @data.group_by{|t|"#{t.p_id}_#{t.state}"}
+  - project_data = @data.group_by{|t|"#{t.p_id}_#{t.state}"}
   - admin_dash_states.each do |i,state|
-    %tr
+    %tr{class: "#{state}_row state_rows", "data-state"=>state}
       %td
         = state ? t("states.#{state}") : "Status"
       - @projects.each do |p|
-        %td
+        %td{class: "project_#{p.id}"}
           -if state
-            - dev_state = deve_data["#{p.id}_#{state}"]
-            - if dev_state
-              - dev_state.each do |ds| 
-                %span.devTodo
-                  =ds.todo_name
+            - proj_state = project_data["#{p.id}_#{state}"]
+            - if proj_state
+              - proj_state.each do |ds| 
+                %span.devTodo{"data-id"=> ds.t_id, "data-statePath"=>change_state_project_todo_path(ds.p_id, ds.t_id)}
+                  = ds.todo_name
           -else
             = p.name
 #piechart{style: "width:900px;hieght:500px"}
+%script{type: "text/javascript", src:"https://www.google.com/jsapi"}
+= javascript_include_tag "admin/dashboards"
 :coffeescript
   data = #{Todo.stats}
-  chart = new ApiChart
+  window.chart = new ApiChart
     data: data
     title: "Todo Stats" 
     id: "piechart"
