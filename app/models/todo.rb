@@ -8,6 +8,7 @@ class Todo < ActiveRecord::Base
   before_create :set_defaults
 
   STATES.each do |i,v|
+    scope i, ->{where("state=?",v)}
     define_method "#{i}?" do
       self.state == v
     end
@@ -29,6 +30,15 @@ class Todo < ActiveRecord::Base
       transition assigned: :inprogress, inprogress: :done
     end
     
+  end
+
+  def self.stats
+    stat = []
+    stat << ["Todos","Status"]
+    stat << ["New", assigned.count]    
+    stat << ["In Progress", inprogress.count]    
+    stat << ["Done", done.count]    
+    stat
   end
 
   private

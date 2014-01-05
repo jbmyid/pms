@@ -1,9 +1,9 @@
-@ApiChart = (stats)->
-  this.stats = stats
+@ApiChart = (params)->
   drawChart = ->
-    data = google.visualization.arrayToDataTable(stats)
-    options = title: "My Daily Activities"
-    chart = new google.visualization.PieChart(document.getElementById("piechart"))
+    console.log options
+    data = google.visualization.arrayToDataTable(params.data)
+    options = title: params.title
+    chart = new google.visualization.PieChart(document.getElementById(params.id))
     chart.draw data, options
   google.load "visualization", "1",
     packages: ["corechart"]
