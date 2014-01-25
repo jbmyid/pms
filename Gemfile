@@ -27,7 +27,8 @@ gem "twitter-bootstrap-rails"
 gem 'haml'
 gem 'qvem'
 gem 'state_machine'
-gem 'debugger'
+# gem 'debugger'
+gem 'capistrano'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

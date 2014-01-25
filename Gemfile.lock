@@ -32,6 +32,10 @@ GEM
     bcrypt-ruby (3.0.1)
     builder (3.0.4)
     cancan (1.6.10)
+    capistrano (3.0.1)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 0.0.23)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -39,13 +43,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.2)
-    columnize (0.3.6)
-    debugger (1.6.0)
-      columnize (>= 0.3.1)
-      debugger-linecache (~> 1.2.0)
-      debugger-ruby_core_source (~> 1.2.1)
-    debugger-linecache (1.2.0)
-    debugger-ruby_core_source (1.2.2)
     devise (2.2.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -70,6 +67,9 @@ GEM
     mime-types (1.25.1)
     multi_json (1.8.2)
     mysql2 (0.3.11)
+    net-scp (1.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.7.0)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
     qvem (0.0.1)
@@ -110,12 +110,19 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    sshkit (1.1.0)
+      net-scp
+      net-ssh
+      term-ansicolor
     state_machine (1.2.0)
+    term-ansicolor (1.2.2)
+      tins (~> 0.8)
     therubyracer (0.12.0)
       libv8 (~> 3.16.14.0)
       ref
     thor (0.18.1)
     tilt (1.4.1)
+    tins (0.12.0)
     treetop (1.4.14)
       polyglot
       polyglot (>= 0.3.1)
@@ -136,8 +143,8 @@ PLATFORMS
 
 DEPENDENCIES
   cancan
+  capistrano
   coffee-rails (~> 3.2.1)
-  debugger
   devise
   haml
   jquery-rails
